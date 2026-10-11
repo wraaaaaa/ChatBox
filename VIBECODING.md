@@ -1,39 +1,26 @@
 # ChatBox：AI 开发交接与项目全量上下文
 
-> 最近更新：2026-10-10（Asia/Shanghai）
+> 最近更新：2026-10-11（Asia/Shanghai）
 >
-> 当前阶段：R002，项目全局规则窗口与跨对话协作约定已记录，业务开发尚未开始。
+> 当前阶段：R003，QQ-Agent v0.5alpha 已原样复制到 `QQ-Agent/`，等待具体二次开发要求。
 >
-> 用途：可把本文件单独发送给其他大模型、开发工具或新接手者，恢复当前项目事实、约束、进度和开发方法。
+> 本文件可独立交接；实际开发前仍须读取当前仓库根目录三文档及相关源码。
 
 ## 1. 接手后首先要知道的事实
 
-本项目的 GitHub 仓库是 `https://github.com/wraaaaaa/ChatBox.git`。本次开发机器上的目录是 `D:\开发\WeChat aibox`，该路径只是当前本地位置，其他机器可以使用不同目录。
+仓库是 `https://github.com/wraaaaaa/ChatBox.git`，本机目录 `D:\开发\WeChat aibox`，当前 `main` 跟踪 `origin/main`。基础提交 `cb535c1` 只有根 `LICENSE`；R001 建立三文档，R002 记录项目规则窗口，R003 按用户要求导入 QQ-Agent 供后续改造。尚未新增微信接入或其他改造功能。
 
-**当前没有业务程序。** 建立这份文档前，仓库只包含 `LICENSE`，基础提交为 `cb535c1 Initial commit`。R001 增加三份文档，用于把用户规则、面向人的说明和面向 AI 的交接固定到仓库中；R002 更新规则窗口职责及跨对话引用方式。不要根据仓库名、目录名或“ChatBox”这个名称，推断它已经接入微信、实现聊天界面、具有 AI 服务或采用某种技术栈。
+原始项目位于 `D:\临时工程\qq bot\QQ-Agent-爆改版-0.3.0-免安装版`。本轮完整复制到根目录的 `QQ-Agent/`，没有编辑任何源文件或副本原始文件。准确盘点为 385 个文件、62 个子目录、425,663,251 字节；逐文件 SHA-256 与目录核对通过，复制前后源内容未变。核对清单留在本机 `.git/qq-agent-import/`，不推送其中的本机数据路径。
 
-发送这份 Markdown，可以恢复已经记录的上下文；它不能代替实时源码、配置和运行证据。**真正开始安全修改前，必须访问当前仓库并核对本文是否与源码一致。** 如果只有这份文档而没有源码，只能分析和拟定方案，不能声称完成实现或验证。任何交接文档都无法保证永远覆盖所有源码细节，也无法保证修改后零缺陷。
+目录名含 0.3.0，实际 `QQ-Agent/package.json` 为 `qq-agent@0.5.0-alpha`，显示版本 `v0.5alpha`。继承的是 QQ 群聊/私聊 AI 机器人及控制台：Node >=20、JavaScript ESM、Electron、原生 HTML/CSS/JS、手写 HTTP/SSE、OneBot v11、模型与工具编排。没有 React/Vue、Express、ORM，也没有根包 scripts、锁文件或打包配置。
 
-### 1.1 已确认、尚未实现与尚未决定
+本地完整副本包括原有依赖、真实配置、聊天数据和 SnowLuma 运行时；Git 仅提交业务源码、素材、现有测试、启动入口及源文档。`data/`、`node_modules/`、`snowluma/` 整包被根 `.gitignore` 排除，未删掉本地文件。远端源码克隆不能直接得到当前完整便携运行环境；恢复运行时方法及其未验证边界见根 README。
 
-| 项目 | 当前状态 | 证据或说明 |
-| --- | --- | --- |
-| Git 仓库 | 已建立 | 本地存在 `.git` |
-| 远程仓库 | 已连接 | `origin` 指向 `https://github.com/wraaaaaa/ChatBox.git` |
-| 分支 | 已建立跟踪关系 | `main` 跟踪 `origin/main`；接手时重新查询 |
-| 初始历史 | 已确认 | `cb535c1 Initial commit` |
-| 许可证文件 | 已存在 | `LICENSE` 为 GNU General Public License Version 3 正文 |
-| 项目开发规则 | R001 建立，R002 更新 | 根目录 `AGENTS.md` |
-| 中文项目说明 | R001 建立，R002 更新 | 根目录 `README.md` |
-| AI 开发交接 | R001 建立，R002 更新 | 本文件 `VIBECODING.md` |
-| 项目全局规则窗口 | R002 确立 | 对话“ChatBox 项目全局规则与说明”；具体开发可在其他对话进行 |
-| 用户可运行的业务功能 | 未实现 | 没有业务源码或程序入口 |
-| 安装、启动与部署流程 | 未实现 | 没有依赖清单、构建脚本、服务或可执行程序 |
-| 自动化测试与 CI | 未建立 | 没有测试代码或 CI 配置 |
-| 产品目标、功能范围与目标用户 | 未决定 | 需要后续用户需求 |
-| 技术栈、运行平台、数据模型、外部服务 | 未决定 | 没有选择证据，不得自行写成既定方案 |
+根 `LICENSE` 保持 GNU GPL v3 原文，`QQ-Agent/LICENSE` 保持源项目 MIT 原文及 Kondius 署名，SnowLuma 保留自带独立 EULA/隐私条款。不得用根许可证覆盖源许可证或把第三方包视作本项目自有代码。
 
-文档建立和更新描述文件内容，不代表远程推送结果。是否已提交、是否已推送，以当前 `git status`、`git log` 和远程分支核验为准，不在文档中提前宣称成功。
+用户追加要求清理的两份旧安装包已移出项目至 `D:\开发\垃圾\ChatBox-旧安装包-20261011`；根 `fatfish.md` 是无关的既有人设提示词，未修改、未提交。它不是现有运行入口自动加载的配置。
+
+本轮在系统 Node v24.14.1 下完成 44 个业务 JS 语法检查和 28 项现有隔离回归测试，全部通过。未启动真实副本、未连接真实 QQ、未调用外部模型，也未验证干净克隆后的完整安装和运行。导入、静态检查、模拟测试、真实运行是不同证据，不能合并宣称部署成功。
 
 ## 2. 必须遵守的长期规则
 
@@ -82,205 +69,208 @@
 
 每轮都要检查三份文档是否需要更新，并同步本轮进度、功能状态、使用方法、代码关系、影响和验证结论。即使某个文档的规则正文不变，也要维护其中的本轮记录，使三份文件对应同一轮项目事实。先更新文档，再与本轮代码一起提交和推送。重要规则不能只停留在聊天记录或依赖模型记忆。
 
-## 3. 当前完整目录与文件关系
-
-本轮文档完成后的受版本管理文件结构如下；`.git` 是 Git 本地元数据，不是应用代码，内部内容不在本文中展开。
+## 3. 目录、原始资料与版本管理边界
 
 ```text
 ChatBox/
-├── AGENTS.md        # 项目规则、开发闭环、进度和验证要求
-├── LICENSE          # GNU GPL Version 3 许可证正文
-├── README.md        # 中文项目说明、当前功能状态、人类使用与二次开发说明
-└── VIBECODING.md    # 可独立发送的 AI 全量交接、依赖与影响说明
+├── AGENTS.md                    项目规则、进度与恢复入口
+├── README.md                    当前中文教程和人类开发说明
+├── VIBECODING.md                本交接文档
+├── LICENSE                      原仓库 GPL v3 正文
+├── .gitignore                   本地数据与运行时提交边界
+├── .gitattributes               QQ-Agent 原始字节/换行保留
+└── QQ-Agent/
+    ├── AGENTS.md / agent.md     原包指令入口与源码导航
+    ├── README.md / 使用说明.md / 快速开始.txt
+    ├── LICENSE / package.json / 启动QQ机器人.bat
+    ├── electron/main.js         桌面与生命周期
+    ├── src/                    42 个业务模块
+    ├── ui/                     页面、脚本、样式和背景视频
+    ├── assets/                 图标
+    ├── tests/                  3 个回归文件和 2 个隔离预览入口
+    ├── data/                   仅本地：真实配置与业务记录
+    ├── node_modules/           仅本地：原包依赖及 Electron
+    └── snowluma/               仅本地：第三方桥接程序、Node、配置、数据库、日志
 ```
 
-不要创建第二份 `agent.md` 来维护另一套规则：本项目使用标准根目录 `AGENTS.md` 作为规则入口。后续新增目录和文件时，应立即更新本节；只有当前实际存在的路径才能进入现状目录树。
+根三文档描述本仓库现状。`QQ-Agent/AGENTS.md` 指向既有 `agent.md`；保留它们是原样复制要求，不是在根目录新增第二套规则。源文档中的“无 .git”、旧路径、旧界面、历史测试数量及历史模型目录仅作为源包上下文，接手时仍核对当前源码；不要为更新这轮导入而改动原件。后续真实功能开发依用户要求更新受影响资料。
 
-| 文件 | 职责 | 与其他文件的关联 | 修改时的影响与核验 |
-| --- | --- | --- | --- |
-| `AGENTS.md` | 项目规则的权威入口；要求 AI 执行开发闭环 | `README.md` 解释人类流程；本文件复制核心规则并说明 AI 工作方式 | 修改规则后同步本文件，检查 README 中开发流程是否仍一致 |
-| `README.md` | 面向人类的功能、教程、原理、修改效果和进度 | 应与源码、`AGENTS.md` 规则和本文项目事实一致 | 新增功能时同步功能状态、教程、原理、限制；本文同步调用链、依赖和验证 |
-| `VIBECODING.md` | AI 接手所需的项目状态、代码关联、影响和验证 | 依据 `AGENTS.md` 规则、README 的用户行为与实际源码 | 变更架构或规则后更新；不可使用本文件覆盖实时源码证据 |
-| `LICENSE` | 当前仓库中的许可证文本 | README 与本文说明其存在 | 本轮不修改；未来若有许可证要求，依据明确需求另行处理 |
+`.gitattributes` 对 `QQ-Agent/**` 设置 `-text whitespace=cr-at-eol`，防止 Git 自动转换原有换行，并使空白检查接受原有 CRLF 行尾。63 个进入 Git 的原包文件已用 `git hash-object --no-filters` 与索引对象逐一核对，字节差异为零。导入文件数不等于提交文件数，运行时和真实数据在本地保留但不上传。新增需要追踪的源码时检查忽略规则；不要强制 `git add -f` 真实运行目录。`node_modules/electron/dist/electron.exe` 为 188,784,128 字节，超过普通 GitHub 单文件限制。
 
-当前没有运行时模块，因此没有业务调用链、API 路由、消息处理、数据库读写、状态机、前后端通信或外部服务依赖。三份文档的关联属于说明与约束关系，不存在“文档代码触发业务执行”的逻辑。
+## 4. 功能清单与真实入口
 
-## 4. 功能、架构与数据的当前全量状态
+以下功能均为原包已有源码，R003 没有改变行为；本轮只对现有回归覆盖部分做隔离验证，未逐项真实业务验收。
 
-### 4.1 功能清单
-
-| 编号 | 项目项 | 状态 | 使用或验证方式 |
-| --- | --- | --- | --- |
-| D001 | Git 版本管理与远程连接 | 已建立 | 使用 `git status`、`git remote -v`、`git branch -vv` 检查 |
-| D002 | 三份中文项目文档与开发约束 | R001 建立，R002 更新 | 阅读并交叉核对三份文件 |
-| B001 | 用户业务功能 | 未实现 | 没有程序，无法进行业务操作或端到端验证 |
-
-D001、D002 是仓库管理能力，不应描述成已经完成的聊天或 AI 产品功能。未来建立真实功能时，应为每个功能新增独立记录，并保留状态、路径和验证证据。
-
-### 4.2 架构与调用链
-
-当前没有选定技术栈，没有程序入口，没有应用模块。不能填写虚构的 `src/`、`app.py`、`package.json`、数据库名或服务端口。
-
-后续出现业务代码后，至少记录以下链条，全部使用实际路径和符号：
-
-```text
-用户操作或外部事件
-  → 实际入口文件与函数
-  → 调用的业务模块与函数
-  → 配置读取、外部服务或存储访问
-  → 返回值、状态变化或用户可见结果
-  → 错误路径、重试或恢复行为
-```
-
-上图是未来记录的结构模板，**不是已实现的调用链**。
-
-### 4.3 数据、配置与安全边界
-
-| 类别 | 当前状态 | 后续必须补充的内容 |
+| 功能 | 用户入口 | 主要实现与关联 |
 | --- | --- | --- |
-| 数据模型与数据契约 | 不存在 | 字段类型、必填项、默认值、生产者、消费者、版本兼容 |
-| 配置与环境变量 | 不存在 | 名称、读取位置、默认值、修改效果、生效时机、示例 |
-| 用户数据与持久化 | 不存在 | 保存位置、数据生命周期、备份、迁移、恢复与清理规则 |
-| 登录、会话与密钥 | 不存在 | 获取方式、保存边界、脱敏方式、失效与恢复路径 |
-| 外部服务与网络调用 | 不存在 | 服务用途、协议、超时、重试、限额和故障行为 |
-| 运行日志 | 不存在 | 位置、格式、敏感字段处理、诊断办法 |
+| QQ 群聊/私聊、接入名单与响应调度 | 设置中的接入/行为与 SnowLuma · OneBot | onebot、app、config、orchestrator、store |
+| 模型接入、官方预设/自定义目录、视觉能力 | 设置 → 模型 API | model-catalog、providers、llm、openai-responses、vision-scan、ui |
+| 运行会话与消息存档 | 会话、存档 | sessions、store、app 的 HTTP/SSE、ui |
+| 人设、角色切换、独立记忆与蒸馏 | 设置 → 人设 | personas、persona-store、persona-distill、prompt、memory |
+| 群友印象、跨群档案/长期事件/表层记忆 | 记忆及设置 → 记忆子项 | memory、memory-global、memory-llm、orchestrator |
+| 定时提醒、重复计划与风格学习 | 设置 → 记忆的提醒/风格子项 | reminders、style-learn、orchestrator、tools、prompt |
+| 联网搜索、网页读取、搜图与反向搜图 | 设置中的搜索/搜图 | web-search、safe-fetch、image-search、tools |
+| 表情、梗库、B 站候选 | 对应设置与工具调用 | stickers、sticker-manager、meme-store、bili-meme、bili-discover |
+| 管理员、禁言与 QQ 身份 | 设置及本地管理员命令 | admin、mute、identity、onebot、app |
+| Token 调用用量与缓存命中统计 | 用量 | sessions、model-identity、llm、app；不包含价格/成本估算 |
+| 主题、玻璃卡片、背景视频、折叠自定义设置 | 顶栏和设置 | ui/index.html、app.js、style.css、refresh.css |
+| 单项/多选/整类记录清理与完整初始化 | 各记录管理页；设置 → 关于 | app 删除路由、factory-reset、electron；确认与忙碌保护 |
 
-未来增加真实运行数据、账号、密钥或环境专属配置时，先明确提交边界并维护忽略规则和安全示例。不要把真实凭据复制到三份文档或提交历史中。
+当前 UI 顶层为会话、存档、记忆、用量、设置。设置已有 13 个分栏，三个记忆功能记录在各自设置子项内管理；顶层记忆只管理聊天群友印象，不能通过顶层一键清空误删三类功能记录。关于页版本与署名来自 `src/app-info.js`，完整初始化需两次确认，第二次输入“初始化”。
 
-## 5. 当前进度与验证证据
+### 4.1 启动与停止顺序
 
-轮次号是稳定的工作标识，不依赖某个提交哈希。提交哈希用 Git 历史查询，避免为了记录自身提交再制造下一次提交的循环。
+桌面入口在 `QQ-Agent/` 内执行 `启动QQ机器人.bat` 或 `& .\node_modules\electron\dist\electron.exe .`。BAT 使用自身所在目录；`electron/main.js` 解析数据路径，设置 `QQ_AGENT_DATA_DIR`，请求单实例锁，必要时先执行 pending 初始化，动态导入 `src/app.js`，调用 `createApp()`/`start()`，创建 BrowserWindow 和托盘。关闭窗口是否退出取决于 `closeAsk`/`closeToTray`；正常完整退出用托盘退出入口。
 
-| 轮次 | 日期 | 已完成的事实 | 当前验证与边界 |
-| --- | --- | --- | --- |
-| R000 | 2026-10-03 | 本地目录连接到 ChatBox Git 仓库；存在基础 `LICENSE` | 建立文档前实际查询：`main` 跟踪 `origin/main`，远程 URL 正确，基础提交为 `cb535c1`，工作区干净 |
-| R001 | 2026-10-03 | 建立 `AGENTS.md`、中文 `README.md` 和本文件；固定四条长期规则与后续维护方法，README 包含从安装 Git 到下载和更新仓库的教程 | 已核对三文档规则及现状一致性，并通过严格 UTF-8 解码、代码块成对、轮次编号与本地链接检查，`LICENSE` 未修改；没有业务代码，因此没有业务运行、测试、构建或部署成功证据；提交和推送状态查询 Git |
-| R002 | 2026-10-10 | 原主开发窗口调整为项目全局规则与说明窗口，记录其标题与 ID、规则维护职责、其他对话引用及文件恢复方式，同步 PowerShell 7 偏好 | 三文档通过 UTF-8、代码块、本地链接、对话 ID 与轮次一致性检查；本轮仅修改三份文档，没有业务功能、技术栈或运行时依赖变化，没有应用运行与部署验证；Git 交付状态以本轮提交和远端核对为准 |
+无窗口入口是 `& .\snowluma\node.exe .\src\server.js`；它调用相同业务核心并处理 SIGINT，但没有 Electron 单实例锁。不要与桌面实例同时启动来测试。源包 Electron 的 `default_app.asar` 已做无参数不显示欢迎页补丁，并保留 `default_app.asar.before-no-welcome` 原件；重装依赖会覆盖补丁。
 
-### 5.1 已知问题与待决定事项
+`createApp()` 本身就含读盘、恢复和写入副作用；真实 `start()` 还会连接协议端、恢复调度/提醒。因此这两条真实启动入口不能用作无副作用测试，R003 未执行。Electron 单实例和 browser storage 可能与原目录实例共享，目录复制不等于桌面配置完全隔离。
 
-- 没有产品功能需求，不能继续擅自构建业务实现。
-- 没有技术栈选择、目标平台、运行方式、依赖或部署目标。
-- 没有业务验证条件。当前文档建立不能作为业务可用的验收依据。
-- 根目录 `AGENTS.md` 能为支持该机制的工具提供项目指令；其他 harness 是否自动读取它取决于工具自身。即使工具不自动读取，也应明确要求它阅读规则和本文件。
-
-### 5.2 下一阶段
-
-等待用户提供产品目标、首批功能和使用场景。接到具体需求后，先补齐受影响的架构、数据与验收标准，再实施本轮范围内的代码。不要仅因本文件列出了维护模板就自动开始建设任意聊天产品、微信机器人或服务端。
-
-## 6. 接手者读取顺序与首次检查
-
-1. 确认正在操作正确项目目录，读取根目录 `AGENTS.md`，核对用户最新要求。
-2. 查询 Git 状态、分支、上游和远程。识别已有用户修改，不覆盖、不混入本轮提交。
-3. 阅读 `README.md`，确认用户可见行为、使用步骤和当前可用范围。
-4. 阅读本文件，确认进度、架构和修改影响；如果有业务源码，沿实际入口阅读生产者与消费者，不能止于文档。
-5. 比对实际文件与本文目录树、功能表和调用链。记录偏差，先修复会误导开发的文档事实。
-6. 对本轮需求定义可验证的完成标准，完成实现、必要验证和三份文档维护，然后自动提交与推送。
-
-在当前仓库目录中运行以下只读命令；使用 PowerShell 时直接逐条执行即可：
-
-```powershell
-git status --short --branch
-git remote -v
-git branch -vv
-git log -5 --oneline
-git ls-files
-```
-
-后续需要确认远程最新历史时，执行 `git fetch origin`，再比较本地与上游。`fetch` 会更新本地远程引用，不会替你解决冲突，也不意味着本地分支已同步。不要因为本文记录过“工作区干净”，就假定接手时仍然干净。
-
-## 7. 每轮开发的完成闭环
-
-1. **范围与事实：** 确定本轮用户需求、验收标准、当前源码和 Git 状态；不要把历史计划写成当前实现。
-2. **影响分析：** 列出修改文件、调用者、被调用者、数据生产者与消费者；确认配置、存储、接口和兼容性是否受影响。
-3. **实现：** 只完成授权范围内的改动，保留用户已有修改；涉及真实数据时明确读写边界与恢复方式。
-4. **适用验证：** 执行与改动有关且项目实际支持的检查；出现失败先定位并修复。纯文档轮次主要检查事实、路径、规则一致性和 Markdown，不虚构测试套件。
-5. **同步文档：** 为三份 Markdown 更新同一轮记录；README 解释用户操作和修改效果，本文解释代码关系和影响，AGENTS 维护规则、流程和进度。
-6. **审查提交：** 运行 `git diff --check`、查看差异和暂存内容；明确暂存本轮文件，检查没有混入凭据、生成文件或不相关改动。
-7. **自动发布开发结果：** 创建表达本轮真实内容的提交，执行正常 `git push`，核对远程已包含该提交。出现远程领先时先查明差异，安全整合并重新验证；不得强推覆盖。
-8. **如实汇报：** 说明改了什么、适用验证结果、提交与推送结果、未验证部分和阻塞事项。命令成功与运行成功分开描述，本地成功与部署成功分开描述。
-
-长任务在切换阶段或预计压缩上下文前，应把已完成、进行中、未验证事项和下一步写回文件。压缩上下文、任务中断或更换开发工具后，重新读取三份文档和当前源码，依据落盘事实继续，不靠聊天记忆推断进度。
-
-以 R001 文档初始化为例，暂存命令应明确指定三份文件：
-
-```powershell
-git diff --check
-git add -- AGENTS.md README.md VIBECODING.md
-git diff --cached --stat
-git diff --cached
-git commit -m "docs: establish project rules and Chinese development guides"
-git push
-git status --short --branch
-```
-
-这是 R001 的命令示例，**不是已执行成功的日志**。后续轮次替换为实际变更路径与提交说明。推送失败不能通过盲目重试、强推或破坏用户工作来解决。结束前核验远程分支包含本轮提交后，才能汇报推送成功。
-
-## 8. 后续每轮必须维护的信息模板
-
-以下模板用于后续新增真实功能；各字段必须填实际信息。没有对应实现的内容标注“未实现”或“不适用”，未知信息标注“待确认”。禁止把模板中的占位符当成真实路径或已完成任务。
-
-### 8.1 单个功能记录
-
-| 字段 | 必填内容 |
-| --- | --- |
-| 功能编号、名称与状态 | 未实现 / 开发中 / 已实现未验证 / 已验证；不要仅写“完成” |
-| 用户目的与操作入口 | 谁在什么情况下如何触发，README 对应教程位置 |
-| 实际入口与调用链 | 文件路径、函数或类、调用先后、同步或异步行为 |
-| 输入与输出契约 | 类型、字段、默认值、错误、兼容性、生产者与消费者 |
-| 配置与生效机制 | 名称、默认值、读取路径、修改效果、是否需要重启 |
-| 数据与外部依赖 | 保存位置、外部服务、协议、权限、生命周期、迁移 |
-| 跨文件关系 | 修改一处后必须同步检查的文件、理由和预期效果 |
-| 异常与恢复 | 失败触发条件、用户表现、日志、重试和恢复路径 |
-| 验证证据 | 实际命令或步骤、环境、结果、通过条件和未验证边界 |
-| 已知限制 | 尚未支持的场景、已知缺陷、风险与后续事项 |
-
-### 8.2 模块与依赖关系表
-
-| 实际文件或模块 | 主要符号与职责 | 调用者 | 被调用者或外部依赖 | 数据契约 | 修改影响 | 适用验证 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 当前无业务模块 | 未实现 | 不适用 | 不适用 | 不适用 | 不适用 | 不适用 |
-
-后续按实际模块替换或增加行。要解释关系为何存在，例如“修改返回字段会影响哪几个消费者”，不能只填路径列表。
-
-### 8.3 配置与修改效果表
-
-| 实际配置项 | 默认值与允许值 | 读取位置 | 修改后的效果 | 生效时机 | 关联模块 | 验证与恢复 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 当前无业务配置 | 未实现 | 不适用 | 不适用 | 不适用 | 不适用 | 不适用 |
-
-### 8.4 本轮进度记录字段
-
-- 稳定轮次号与日期，例如下一轮从 `R003` 继续。
-- 本轮需求和明确验收条件。
-- 实际修改文件、关键符号与修改原因。
-- 已完成事实、未完成事项、待决定内容和已知问题。
-- 修改影响、兼容性、数据迁移与恢复办法；不适用时明确写出。
-- 实际验证命令或手工步骤、结果和未验证范围。
-- 三份文档的同步内容及一致性检查结果。
-- Git 提交与远程核验办法；不要预先写成功，也不要为了记录本文自身提交哈希反复创建提交。
-- 下一轮需要的最少上下文与待解决任务，不把未经用户确认的方案写成既定决定。
-
-历史事实仍成立时保留；事实发生变化时更新现状并说明变更，不让旧状态与新状态混杂成两套答案。
-
-## 9. 可直接发送给接手 AI 的指令
-
-将本文件全文发送，并附上下面这段话即可开始交接；具体开发任务由用户另外提供：
+### 4.2 核心调用链
 
 ```text
-你正在接手 ChatBox 项目。请把随附的 VIBECODING.md 当作项目交接，先区分事实、计划和未决定内容。
-项目全局规则与说明窗口为“ChatBox 项目全局规则与说明”，对话 ID：01a1014c-a0af-7fa1-a491-4eda1ced4637；具体开发可在其他对话进行。
-请读取当前仓库根目录 AGENTS.md、README.md 和实际源码，并查询 Git 状态、远程和当前分支，核对交接信息是否过时。
-Windows 默认使用 PowerShell 7（pwsh.exe）执行命令，仅在确实需要 5.1 兼容特性时使用 5.1 并解释例外。
-用户已要求每轮开发完成适用验证并同步 AGENTS.md、README.md、VIBECODING.md，然后自动提交和正常推送 Git，无需再次请求正常推送许可。
-请保护已有用户修改，不强推，不混入无关文件或真实凭据。修改前沿实际调用链检查生产者、消费者和相关文件，修改后说明影响与验证边界。
-当前产品业务功能尚未实现，技术栈与需求尚未决定；不要因为项目名称推断已有微信或 AI 功能。
-如果你无法访问当前仓库，只能据文档分析，明确说明不能完成源码修改与运行验证。
-接下来根据我提供的具体任务继续开发；不要仅根据文档模板自动建设未经指定的业务功能。
+OneBotClient WS 事件
+ → app.js：群/私聊分流、自身回显排除、名单和管理员过滤、媒体解析
+ → ChatStore.appendIncoming()：mid 去重、存档与未读
+ → 身份/风格/表层记忆采样 + chat-update
+ → Orchestrator.onIncoming()/scheduleWake()：聚批、触发、并发、消费未读
+ → buildSystemPrompt()/buildUserPrompt()：角色、记忆、历史、工具
+ → chatCompletionWithRetry() ↔ executeTool()
+ → SendQueue → OneBot HTTP action → 发出内容留档
+ → sessions/usage/记忆持久化 → SSE 和 UI 轮询更新
 ```
 
-## 10. 当前验收边界
+同一 `chatKey` 最多一个模型运行，跨聊天受 `maxConcurrentRuns` 闸门控制；运行中新消息留在未读。未命中触发的批次标记已读并保留 skip 原因。pendingPlans 是内存等待计划，不是落盘运行会话。`done` 表示发过内容，`noreply` 为正常结束但未发言，error/aborted 不算正常完成。失败恢复、重试和部分发送交织，不能宣称全链路 exactly-once。
 
-R001 的交付范围是仓库内三份文档和固定的开发闭环；R002 的交付范围是规则窗口职责、跨对话引用方式及命令执行偏好的同步说明。两轮都不包含产品功能、安装包、服务启动、微信登录、AI 调用、数据库、自动化测试或线上部署。
+“无状态 Agent”只表示每轮重组模型上下文，不代表消息/记忆/提醒/用量无持久状态。`api.textFallback` 有受过滤的纯文本发言兜底，`api.endAfterSend` 可能在发送类工具成功且无查询类工具时提前结束；新增工具同步 `SEND_TOOLS`/`QUERY_TOOLS` 和 prompt 分类。
 
-当前可以核验文档是否完整说明四条规则、是否与仓库实际结构一致、是否区分已完成与未实现、是否完成 Git 提交及正常推送。没有运行程序时，不存在能够证明产品可用的业务测试。后续有实现后，必须逐轮替换本节中的现状和适用验收，保留真实证据与未验证范围。
+## 5. 模块、上下游与改动影响
+
+表内路径均相对 `QQ-Agent/`。
+
+| 文件 | 职责和关键关系 | 修改时同时核对 |
+| --- | --- | --- |
+| electron/main.js、src/server.js | 桌面/无窗口生命周期，调用 createApp/start/stop | 数据目录、重启、退出、单实例、factory-reset |
+| src/app.js | 总装、OneBot 入站、SnowLuma 子进程/令牌同步、handleHttp、SSE、用量 | 路由 UI 消费者、存储、忙碌保护、start/stop |
+| src/config.js | DEFAULT_CONFIG、getConfig、updateConfig、setRuntimeConfig、档位派生 | 默认值、深合并/删除、API脱敏、当前设置分栏 saveConfig |
+| src/onebot.js、src/sender.js | WS事件/HTTP action、消息段/合并转发、SendQueue 串行发送与限频 | app事件、tools目标绑定、store出站留档、重试/部分成功 |
+| src/store.js、src/sessions.js | 聊天记录/未读/去重、会话索引/状态/用量与恢复 | app删除/分页、orchestrator失败批回放、模型标识 |
+| src/orchestrator.js | 聚批/触发/并发、工具轮次、主动机会、记忆/提醒调度 | store、prompt、llm、tools分类、发送状态和恢复 |
+| src/prompt.js、src/tier-slider.js | 系统/用户上下文、无依赖档位换算 | config、orchestrator、工具可见性、token预算和人设记忆 |
+| src/llm.js、src/openai-responses.js | 模型请求、超时/重试/400兼容；Responses函数/图片/推理适配 | providers、model-catalog、orchestrator assistant.raw重放、用量 |
+| src/providers.js、src/model-catalog.js | 模型目录、connectModel校验、密钥解析/保存、模型列表和测试 | UI接入弹窗、同端点密钥复用、跨端点禁止复用、请求协议 |
+| src/prompt-cache.js、src/model-identity.js | 缓存标记与模型展示/历史用量标识 | llm请求体、sessions、usage旧记录回退 |
+| src/tools.js | buildToolDefs/executeTool，36个工具及参数/上下文绑定 | prompt、orchestrator工具筛选/分类、UI TOOL_META、sender |
+| src/personas.js、src/persona-store.js、src/persona-distill.js | 角色卡、人设管理、memoryKey、记忆迁移与蒸馏 | config切换、memory目录、prompt、UI保存 |
+| src/memory.js、src/memory-global.js、src/memory-llm.js | 群友印象、全局档案/事件/表层记忆、后台整理模型 | persona路径、orchestrator、prompt检索、删除/SSE与忙碌保护 |
+| src/reminders.js、src/style-learn.js | 提醒时间/重复/领取，风格样本/蒸馏/注入 | orchestrator调度、tools、prompt、设置内记录管理 |
+| src/stickers.js、src/sticker-manager.js、src/image-search.js | 表情同步/规范化/评分，搜图过滤/下载/反搜/降级 | tools、sender、图片配置与UI、网络失败/冷却 |
+| src/web-search.js、src/safe-fetch.js | 多搜索服务/网页读，URL/DNS/重定向/大小保护 | tools、自定义源配置、认证字段、网络超时 |
+| src/meme-store.js、src/bili-meme.js、src/bili-discover.js | 梗库导入/检索/合并，B站资料/候选 | tools、UI、来源与记录生命周期 |
+| src/admin.js、src/mute.js、src/identity.js | 管理员命令、禁言、账号身份/曾用名 | app过滤、onebot事件、相关设置保存 |
+| src/vision-scan.js、src/model-vision-docs.js | 视觉探测/内置资料、运行时能力 | providers、llm、工具集合与UI图片偏好 |
+| src/app-info.js、src/factory-reset.js | 版本署名，prepare挑战/目录边界/pending重启/分阶段清理 | app初始化路由、electron重启/旧进程退出、config默认恢复 |
+| src/util.js、src/md-to-plain.js | 原子写、事件/串行链、CQ转义、消息规范化与文本转换 | 所有存储/消息消费者；不要绕过原子写和转义 |
+| ui/index.html、ui/app.js、ui/style.css、ui/refresh.css | 页面/全局状态、api/connectSSE/轮询、分栏渲染与保存 | handleHttp事件契约、esc转义、异步目标检查、输入保留 |
+
+后端模块需完整退出重启才加载修改；刷新 WebUI 只重载前端。不要因 README 里的历史入口或模型名推断当前服务必可用。模型目录是复制时源码常量，更新前另行核对实际协议/请求 ID/图片/思考参数，本轮没有验证外部模型支持范围。
+
+## 6. 配置、接口与持久化契约
+
+### 6.1 默认值、配置加载和生效
+
+| 配置 | 源码默认与行为 | 影响 |
+| --- | --- | --- |
+| QQ_AGENT_DATA_DIR | 在导入 config 模块前决定 DATA_DIR；默认项目 data/；桌面入口解析后设定 | 改动影响全部业务存储，但不能独立隔离 SnowLuma |
+| server | 127.0.0.1:3210，端口占用时从基准检查10个；closeAsk/closeToTray/autoStart控制桌面 | 使用start返回实际端口，退出与关窗分开 |
+| snowluma.wsUrl/httpUrl | ws://127.0.0.1:3001 / http://127.0.0.1:3000 | WS收事件、HTTP发action；旧使用说明中反向端口不能照抄 |
+| snowluma.dir/autoLaunch | 默认根 snowluma/；可配置外部目录与自动启动 | 自定义外部目录、令牌同步、已有协议端需要额外核对 |
+| api.baseUrl/apiKey/model | 默认留空 | 仅复制代码无法调用模型，UI保存接入即持久化；连通性测试才发测试请求 |
+| api | temperature=0.8、maxRounds=12、timeoutMs=180000、promptCache=auto、thinking=low | 工具轮数/超时/缓存/推理均会改变调用行为；遵守兼容处理 |
+| providers及密钥映射 | 当前模型/目录与独立提供商密钥保存 | 允许同端点留空复用，禁止跨端点复用旧密钥；常规配置/列表GET脱敏，专用回读接口见下文 |
+| store.contextSliderPos | 保存时派生档位/概率 | tier-slider、prompt和UI范围共同变化 |
+| 名单、人设、记忆/提醒/风格、搜索/搜图 | DEFAULT_CONFIG中完整默认 | 新字段同时检查后端消费者、HTTP脱敏/保存、UI分栏/保存及旧配置回退 |
+
+持久化真实配置没有在本轮重新填写或归零。`getConfig()` 懒加载并缓存；`updateConfig()` 递归深合并普通对象、替换数组并原子写盘。删除映射旧键用 `{ __replace__: value }`，空对象不会清空。`setRuntimeConfig()` 只改内存，测试在完整默认配置副本上覆盖。UI只渲染当前分栏，saveConfig不能用缺失DOM覆盖其他栏的参数；未修改密钥时不能用空串覆盖真实值。
+
+### 6.2 HTTP 与事件
+
+路由集中在 `src/app.js::handleHttp()`，UI由 `api()` 发请求、`connectSSE()` 订阅 `/api/events`，另有轮询/分页回退。主要路由族：状态/config、model-catalog/model-connection/providers/models、sessions/chats、memory-global/memory-files、personas/reminders/style、memes/stickers/image-search、usage、snowluma、pause/admins/muted-groups/identity、version/factory-reset。关于页读取 `GET /api/version`；初始化使用 `POST /api/factory-reset/prepare`、`POST /api/factory-reset/confirm` 和 `GET /api/factory-reset/status`。
+
+常规 `GET /api/config` 和 `GET /api/providers` 返回脱敏信息。`GET /api/providers/key`、`GET /api/api-key`、`GET /api/search-key` 是供本机界面专用的明文密钥回读接口，通过 `keyEndpointAllowed()` 校验来源；不能把所有 GET 都描述为脱敏，也不能将这些回读结果写入日志、交接或提交。
+
+`POST /api/model-connection` 调用 providers.connectModel()，校验后一次保存端点/模型/密钥/目录，失败保持现有连接，返回 `{ ok: true, provider: sanitizeProvider(result.provider), model: result.model }`。后端发出包含 `configUpdated` 的 status 事件，UI再回读配置；响应没有 config 属性。默认兼容路径走 Chat Completions；源码识别的官方 GPT-6端点走 Responses，工具调用和图片/加密推理重放通过 openai-responses.js，不能丢弃 assistant.raw。GLM续轮保留 reasoning_content。此处描述当前复制源码处理，不代表已经真实验证这些外部产品。
+
+`POST /api/data/delete` 用 `area=sessions|chats|memory` 与 `ids` 或 `all:true`；消息清理用 chatKey/messageIds。特殊记忆 id 为 `__global__`、`__reminders__`、`__style__`。普通清理不重置人设/白名单/密钥/用量/SnowLuma，保留运行/整理/发送中的忙碌保护。顶层群友印象清空只提交聊天键，不能发送all:true连带删三类设置记录。
+
+完整初始化是独立的二次确认、短期一次性挑战与冷重启流程，通过 factory-reset.js 在新进程清理项目数据与内置桥接配置/数据/日志；先检查旧进程退出和目录边界，移动阶段失败恢复，删除阶段失败明确未完成并留待下次继续。电脑 QQ 客户端自身登录文件不在清理范围。测试只能对自身隔离夹具执行，不对真实 data 发清理请求。
+
+### 6.3 数据标识与路径
+
+- 聊天键为 `group:<id>` / `private:<id>`，文件和部分路径用 `group_<id>` / `private_<id>`；本地消息id与QQ mid不同，mid可为负数。
+- `data/messages/*.json` 为 `{ chatKey, nextLocalId, messages }`；入站event.time秒换为毫秒，去重比较最近500条非自身消息，不能声称无限历史去重。
+- `data/sessions/*.json` 保存触发、提示词、模型轮次、工具、发送、状态和用量，索引/累计另由sessions维护。
+- `data/memory/<memoryKey>/` 为人设记忆，含聊天印象、`_global/`、`_style/`；提醒在`_global/reminders.json`。共享梗库在`data/memory/memes/`并兼容旧路径。
+- `data/config.json`、旧配置备份、stickers、用量、日志及媒体缓存也是真实数据；文件写入复用writeTextAtomic()/writeJsonAtomic()，检查内存缓存和旧格式。
+- SnowLuma的config/data/logs及SQLite主库/WAL/SHM属于第三方桥接；不与业务JSON混为一层。备份/恢复先正常退出应用与桥接，不把在线文件复制宣称为数据库事务一致性备份。
+- `snowluma.dir`、环境变量可能指向源目录或其他真实实例；未来启动前仅核对路径是否相互引用，不在文档/终端输出密钥、账号、聊天原文。
+
+## 7. 验证、升级与恢复
+
+R003复制核对清单在`.git/qq-agent-import/source-manifest.json`与`verification.json`，包含本机路径；不能添加到提交。原根LICENSE与fatfish.md的哈希在preserved-files.json，旧安装包移动后哈希也核对一致。测试后重新核对385个源/副本文件，变化为零。根三文档严格UTF-8、代码块成对、R000–R003与规则窗口ID、本地链接检查通过；暂存范围排除私有目录/用户无关文件，凭据模式扫描无候选，git diff与暂存空白检查通过。该模式扫描不是全面凭据审计。提交后另核验远端SHA。
+
+在 `QQ-Agent/` 下运行现有检查：
+
+```powershell
+node --version
+node --test tests/community-removal.test.mjs tests/model-connection.test.mjs tests/factory-reset.test.mjs
+$checkFiles = @(Get-ChildItem .\src -Filter *.js -File) + @(Get-ChildItem .\electron -Filter *.js -File) + @(Get-Item .\ui\app.js)
+foreach ($checkFile in $checkFiles) {
+    node --check $checkFile.FullName
+    if ($LASTEXITCODE -ne 0) { throw "语法检查失败：$($checkFile.FullName)" }
+}
+```
+
+本轮实际使用系统Node v24.14.1：28/28测试通过，44/44脚本语法检查通过。三个测试文件分别12/7/9项，使用新临时DATA_DIR、替代SnowLuma目录、fixture密钥与模拟fetch；HTTP测试仅随机loopback监听，不调用真实app.start()。factory-reset跨进程仅清理自身临时目录。包内Node历史有原生集成异常，系统Node优先；不能把历史异常或旧版本测试数当本次失败/结果。
+
+隔离UI预览入口为`node tests/ui-smoke-server.mjs`，输出随机URL；本轮未执行浏览器交互验收。`factory-reset-preview.mjs`供隔离重启预览，同样不可拿真实数据测试。
+
+新克隆须安装Node>=20与依赖，并另行准备符合其条款的SnowLuma包或配置外部OneBot。没有根npm scripts，不能执行猜测的npm start。使用npm install/npx electron .重建普通开发环境的流程见根README，R003未实测，且不能保证与原便携依赖/补丁完全一致。
+
+升级前正常退出，保存完整业务data和桥接config/data，以及当前代码/运行时副本。git pull --ff-only只更新追踪文件，ignored真实数据和运行时不随Git备份；升级存储格式前检查旧数据迁移。恢复失败先退出相关实例，复制经核对的备份至对应目录，保留失败副本供诊断；不强推/重置共享历史，不盲目初始化真实账号数据。
+
+## 8. 轮次、问题与下一步
+
+| 轮次 / 上海日期 | 交付 | 验证与边界 |
+| --- | --- | --- |
+| R000 / 2026-10-03 | 本地绑定ChatBox仓库，main跟踪origin/main | 初始cb535c1仅LICENSE |
+| R001 / 2026-10-03 | 固定四项规则、中文Git教程、独立AI交接 | 三文档UTF-8/代码块/链接/一致性核对；无业务代码 |
+| R002 / 2026-10-10 | 规则窗口职责、引用ID及PowerShell7偏好同步 | 三文档检查；99fe14a曾与远端一致；无业务修改 |
+| R003 / 2026-10-11 | 原样导入QQ-Agent、划定本地/远端边界、清理指定旧安装包、更新三文档 | 385文件/62目录、425663251字节、SHA-256一致；44语法/28隔离测试通过；真实QQ/模型/克隆环境未验证；提交推送以Git实查为准 |
+
+本轮业务/API/配置/数据格式完全未改，没有新增产品功能或迁移。后续改造目标、微信接入方式及验收条件仍待用户指定；不能因目录名或这份文档清单自行开始某个改造。
+
+已知边界：本地副本继承真实设置；外部SnowLuma路径/同QQ端口/单实例共享需在真实启动前核对。源码克隆缺少便携运行时、数据与原Electron补丁。源包说明存在历史路径、端口和测试数，根文档提供本仓库现状，但任何未来功能改动仍沿实际调用链核实。R003仅记录复制时模型目录，没有重新确认外部供应商当前支持。
+
+下一轮从R004继续：先读取三文档与用户新任务，核对Git，梳理受影响生产者→接口/数据→消费者→验证；在QQ-Agent内开发并同步配置/存储/UI/说明。不要编辑依赖或第三方打包文件来做普通业务功能。
+
+## 9. 接手与每轮交付闭环
+
+1. 确认根目录，读AGENTS/README/本文，核对用户最新明确授权；阅读相关QQ-Agent/agent.md和真实源码。
+2. 检查git status --short --branch、remote -v、branch -vv、近期提交；保留已有改动。根fatfish.md目前是用户未跟踪文件，不混入本轮。
+3. 明确这轮可验收行为，沿模块表读取修改点及上下游、配置默认、存储、错误与重试。
+4. 实现范围内改动，选用现有适用隔离检查；真实QQ和付费模型的验证单独记录，初始化须按用户实际范围。
+5. 三文档同步同一R编号/上海日期，记录完成、未验证、问题、影响和下一步；切阶段或压缩前落盘。
+6. git diff --check，检查暂存差异与秘密/真实数据边界，明确添加本轮文件，正常commit/push。
+7. git rev-parse HEAD与git ls-remote origin refs/heads/main核对；只有推送成功且SHA相符才报告已推送，失败保留本地提交并说明实际原因。
+
+可以把本文件全文和下列指令交给接手模型：
+
+```text
+接手ChatBox项目：先读根AGENTS.md/README.md/VIBECODING.md并核对Git和QQ-Agent当前源码。
+项目规则窗口为ChatBox 项目全局规则与说明，ID 01a1014c-a0af-7fa1-a491-4eda1ced4637。
+Windows默认pwsh.exe；每轮三文档同编号同步，验证后自动正常提交/推送并核对远端，不重复请求已授权推送。
+R003原样导入QQ-Agent v0.5alpha；真实数据/依赖/SnowLuma在本地但不在Git。不得以测试为由清空、启动或覆盖真实数据。
+未实现微信改造，未验收真实QQ/模型与干净克隆运行；本轮44语法/28隔离测试通过。具体下一步以用户提供的新任务为准。
+只能访问文档而不能核对源码时，明确只能分析，不能声称修改或运行成功。
+```

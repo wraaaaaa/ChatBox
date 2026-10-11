@@ -1,0 +1,2 @@
+# 原样导入的 QQ-Agent 文件在 Git 中保留字节和原有换行。
+QQ-Agent/** -text whitespace=cr-at-eol

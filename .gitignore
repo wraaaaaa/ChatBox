@@ -1,0 +1,10 @@
+# 完整便携副本保留在本机；真实配置、会话、密钥和第三方运行时不推送。
+/QQ-Agent/data/
+/QQ-Agent/node_modules/
+/QQ-Agent/snowluma/
+/QQ-Agent/output/
+/QQ-Agent/.playwright-cli/
+/QQ-Agent/.factory-reset*
+/QQ-Agent/.env
+/QQ-Agent/.env.*
+/QQ-Agent/*.log
